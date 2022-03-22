@@ -18,41 +18,48 @@ public class Principal {
 		System.out.println("Digite uma opção: ");
 		resp = sc.nextInt();
 		
-		switch (resp){
-			case 1: 
-				//Mostrar usuários
-				usuarios = dao.getUsuarios();
-				System.out.println("==== Mostrar usuários === ");		
-				for(int i = 0; i < usuarios.length; i++) {
-					System.out.println(usuarios[i].toString());
-				}
-				break;
-				
-			case 2: 
-				//Inserir um elemento na tabela
-				if(dao.inserirUsuario(usuario) == true) {
-					System.out.println("Inserção com sucesso -> " + usuario.toString());
-				}
-				break;
-				
-			case 3:
-				//Excluir usuário
-				dao.excluirUsuario(usuario.getCodigo());
-				break;
-				
-			case 4: 
-				//Atualizar usuário
-				usuario.setSenha("nova senha");
-				dao.atualizarUsuario(usuario);
-				break;
-				
-			case 5:
-				System.exit(1);
-				break;
-			default: System.out.println("Digite um numero valido!"); break;
-		}
 		
-		dao.close();
-		sc.close();
+		while(true) {
+		
+			switch (resp){
+				case 1: 
+					//Mostrar usuários
+					usuarios = dao.getUsuarios();
+					System.out.println("==== Mostrar usuários === ");		
+					for(int i = 0; i < usuarios.length; i++) {
+						System.out.println(usuarios[i].toString());
+					}
+					break;
+					
+				case 2: 
+					//Inserir um elemento na tabela
+					if(dao.inserirUsuario(usuario) == true) {
+						System.out.println("Inserção com sucesso -> " + usuario.toString());
+					}
+					break;
+					
+				case 3:
+					//Excluir usuário
+					dao.excluirUsuario(usuario.getCodigo());
+					break;
+					
+				case 4: 
+					//Atualizar usuário
+					usuario.setSenha("nova senha");
+					dao.atualizarUsuario(usuario);
+					break;
+					
+				case 5:
+					System.exit(1);
+					break;
+					
+				default: 
+					System.out.println("Digite um numero valido!"); 
+					dao.close();
+					break;
+			}
+		
+			resp = sc.nextInt();
+		}
 	}
 }
